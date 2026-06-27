@@ -269,7 +269,7 @@ beyond, we aim to engage:
 
 <!-- Founding members — submit a PR to add yourself -->
 
-- _(Your name and GitHub handle here)_
+- Brett Smith <@xbcsmith>
 
 ---
 
@@ -282,7 +282,7 @@ New members are advised to:
 
 - Join the SIG mailing list. <!-- Update with list URL when available -->
 - Join the CDF TOC mailing list.
-- Join the `#sig-cicd-ai` Slack channel in the
+- Join the `#sig-ai` Slack channel in the
   [CDF Slack workspace](https://cdeliveryfdn.slack.com).
 - Review this README thoroughly.
 - Submit a pull request to add yourself to the Members list above.
