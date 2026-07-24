@@ -270,6 +270,7 @@ beyond, we aim to engage:
 <!-- Founding members — submit a PR to add yourself -->
 
 - Brett Smith <@xbcsmith>
+- Animesh Pathak <@sonichigo>
 
 ---
 
