@@ -271,6 +271,7 @@ beyond, we aim to engage:
 
 - Brett Smith <@xbcsmith>
 - Animesh Pathak <@sonichigo>
+- Muhammad Danyal Khan <@sage-khan>
 
 ---
 
