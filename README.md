@@ -1,6 +1,6 @@
 # CI/CD Artificial Intelligence (AI) Special Interest Group
 
-[Website](#) <!-- Update with hosted site URL when available -->
+<!-- Website URL to be added when available -->
 
 Artificial Intelligence is rapidly reshaping every phase of the software
 delivery lifecycle—from intelligent test generation and automated code review to
@@ -122,7 +122,7 @@ The CI/CD AI Special Interest Group aims to:
 
 The SIG will undertake the following key activities:
 
-**CI/CD Pipeline Integration for AI Workloads**
+### CI/CD Pipeline Integration for AI Workloads
 
 - Define pipeline stages, event triggers, and promotion gates specific to ML
   model development lifecycles.
@@ -132,7 +132,7 @@ The SIG will undertake the following key activities:
 - Develop guidance on data versioning and dataset pipeline management as
   first-class CI/CD concerns.
 
-**MLOps and Continuous Training**
+### MLOps and Continuous Training
 
 - Establish best practices for continuous training (CT) pipelines, including
   triggered retraining, data drift detection gates, and automated evaluation.
@@ -142,7 +142,7 @@ The SIG will undertake the following key activities:
   pipelines, including parameter-efficient fine-tuning (PEFT) techniques such as
   LoRA.
 
-**AI Agent Harnesses and Agentic Pipelines**
+### AI Agent Harnesses and Agentic Pipelines
 
 - Define harness patterns for integrating LLM-based coding agents, planning
   agents, and multi-agent systems into CI/CD workflows.
@@ -151,7 +151,7 @@ The SIG will undertake the following key activities:
 - Document patterns for human-in-the-loop (HITL) approval gates in agentic
   pipelines.
 
-**Inference Serving and Deployment**
+### Inference Serving and Deployment
 
 - Provide guidance on deploying and managing inference servers (e.g., vLLM,
   Triton Inference Server, ONNX Runtime, llama.cpp) within CD pipelines.
@@ -160,7 +160,7 @@ The SIG will undertake the following key activities:
 - Cover model observability, latency SLOs, and feedback loop integration for
   production inference.
 
-**Security for AI Workloads**
+### Security for AI Workloads
 
 - Identify and map security controls to AI-specific threat vectors: model supply
   chain attacks, prompt injection, data poisoning, API key exposure, and
@@ -170,7 +170,7 @@ The SIG will undertake the following key activities:
 - Provide secure configuration guidance for inference APIs, model hosting
   platforms, and AI-assisted developer tooling within the pipeline.
 
-**Platform Engineering Best Practices**
+### Platform Engineering Best Practices
 
 - Develop reference architectures for AI-ready internal developer platforms,
   including GPU compute provisioning, shared model serving infrastructure, and
@@ -180,7 +180,7 @@ The SIG will undertake the following key activities:
 - Document patterns for cost governance, resource quotas, and scheduling for
   GPU-backed pipeline workloads.
 
-**Community Collaboration**
+### Community Collaboration
 
 - Review and align guidance with relevant CNCF cloud native AI work, LF AI &
   Data projects, and OpenSSF supply chain security work.
@@ -311,6 +311,7 @@ CI/CD AI is a
 [CDF Special Interest Group](https://github.com/cdfoundation/toc/tree/main/sigs).
 Governance details for CDF SIGs can be found in the
 [CDF Working Groups and SIGs process](https://github.com/cdfoundation/toc/blob/main/GROUPS.md#sigs).
+
 <!-- Update with SIG-specific governance link when established -->
 
 ---
