@@ -13,12 +13,13 @@ the topic of Architectural Knowledge Management (AKM).
 
 ## Adding an ADR
 
-To propose a new ADR, create an initial draft in the `explanations/arch/drafts`
-directory by copying the [template](./drafts/adr-template.md). The draft may be
-merged as "accepted" if the new ADR is simple enough, otherwise there may be
-additional PRs to edit and refine the ADR. Once the ADR PR is merged and
-accepted, create a final PR to move the ADR out of drafts and assign it a
-number. Along with every accepted ADR added, the following files must be updated
+To propose a new ADR, create an initial draft in the
+`docs/explanation/arch/draft` directory by copying the
+[template](./draft/adr-template.md). The draft may be merged as "accepted" if
+the new ADR is simple enough, otherwise there may be additional PRs to edit and
+refine the ADR. Once the ADR PR is merged and accepted, create a final PR to
+move the ADR out of drafts and assign it a number. Along with every accepted ADR
+added, the following files must be updated
 
 ## Information
 

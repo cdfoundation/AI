@@ -98,4 +98,4 @@ for a community SIG without introducing external dependencies.
 
 - [GitHub Issues documentation](https://docs.github.com/en/issues)
 - [GitHub Projects documentation](https://docs.github.com/en/issues/planning-and-tracking-with-projects)
-- [CDFoundation AI SIG repository](https://github.com/cdfoundation/sig-ai)
+- [CDFoundation AI SIG repository](https://github.com/cdfoundation/AI)
