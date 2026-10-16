@@ -273,6 +273,7 @@ beyond, we aim to engage:
 - Animesh Pathak <@sonichigo>
 - Muhammad Danyal Khan <@sage-khan>
 - Joseph Shriner <@shrinedogg>
+- Liora Milbaum <@lmilbaum>
 
 ---
 
