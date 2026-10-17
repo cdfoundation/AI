@@ -293,6 +293,14 @@ paths, agents make autonomous decisions about how to proceed.
 
 ## MLOps and Continuous Training
 
+### Concept Drift
+
+A change over time in the relationship between a model's inputs and the correct
+outputs, so that patterns the model learned no longer hold. Concept drift can
+occur even when the input distribution is stable, and it is a common cause of
+model drift. It is usually detected through labeled feedback or monitoring of
+evaluation metrics rather than input statistics alone.
+
 ### Continuous Training (CT)
 
 The practice of automatically retraining a model in response to triggers such as
@@ -301,12 +309,11 @@ pipelines treat model training as a recurring, automated stage in the delivery
 pipeline rather than a one-time event. Essential for maintaining model accuracy
 as production data evolves over time.
 
-### Data Drift / Model Drift
+### Data Drift
 
-Data drift occurs when the statistical distribution of production input data
-diverges from the distribution the model was trained on. Model drift (or concept
-drift) occurs when the relationship between inputs and correct outputs changes
-over time, degrading accuracy. Both are monitored as signals to trigger
+A change in the statistical distribution of production input data compared with
+the data the model was trained on. Data drift can occur without any drop in
+accuracy, so it is monitored as an early-warning signal that can trigger
 retraining or model review in a CT pipeline.
 
 ### Evaluation Gate
@@ -347,6 +354,14 @@ intended use cases, training data, evaluation results, known limitations, and
 ethical considerations. Model cards are the primary documentation standard for
 published models and are required by many model registries and AI governance
 frameworks.
+
+### Model Drift
+
+The decline in a deployed model's performance over time, such as falling
+accuracy or rising error rates. Common causes include data drift and concept
+drift, where the relationship between inputs and correct outputs changes. Model
+drift is measured against evaluation metrics and is a signal to retrain or
+review the model in a CT pipeline.
 
 ### Model Promotion
 
@@ -414,14 +429,6 @@ outputs against the current model without any user-facing risk.
 
 ## Models & Infrastructure
 
-### Chain of Thought (CoT)
-
-A prompting technique that instructs a model to reason through a problem
-step-by-step before producing a final answer. CoT significantly improves
-accuracy on complex reasoning, math, and multi-step tasks. It can be elicited
-with simple instructions such as "think step by step" or structured into
-explicit reasoning traces in agentic workflows.
-
 ### BPE (Byte Pair Encoding)
 
 A subword tokenization algorithm used by modern AI language models. Originally
@@ -430,6 +437,14 @@ occurring pairs of characters or subword units into single tokens based on
 training corpus statistics. This allows the model to handle any text string
 (including typos, code, and rare words) while keeping its vocabulary size
 manageable.
+
+### Chain of Thought (CoT)
+
+A prompting technique that instructs a model to reason through a problem
+step-by-step before producing a final answer. CoT significantly improves
+accuracy on complex reasoning, math, and multi-step tasks. It can be elicited
+with simple instructions such as "think step by step" or structured into
+explicit reasoning traces in agentic workflows.
 
 ### Frontier Models
 
@@ -447,19 +462,21 @@ techniques include RAG (providing retrieved documents as context), tool use
 (querying live or authoritative data sources), and citation requirements (asking
 the model to reference sources in its response).
 
+### LoRA / PEFT (Low-Rank Adaptation / Parameter-Efficient Fine-Tuning)
+
+A family of techniques for fine-tuning large models by training only a small
+subset of parameters rather than updating all model weights. LoRA freezes the
+pretrained weights and inserts small trainable low-rank matrices into the
+model's attention layers, which can cut trainable parameters by orders of
+magnitude and GPU memory by several times compared to full fine-tuning, with no
+added inference latency once merged. PEFT is the umbrella term; LoRA is the most
+widely adopted method.
+
 ### Model Routing
 
 Automatically selecting which model to use for different tasks based on
 requirements. Some tools route complex reasoning to powerful models and simpler
 tasks to faster/cheaper models.
-
-### LoRA / PEFT (Low-Rank Adaptation / Parameter-Efficient Fine-Tuning)
-
-A family of techniques for fine-tuning large models by training only a small
-subset of parameters rather than updating all model weights. LoRA inserts small
-trainable matrices into the model's attention layers, reducing GPU memory and
-compute requirements by orders of magnitude compared to full fine-tuning. PEFT
-is the umbrella term; LoRA is the most widely adopted method.
 
 ### Non-English Token Tax
 
@@ -473,8 +490,9 @@ windows.
 ### Serverless Infrastructure
 
 Cloud computing platforms that handle infrastructure management automatically,
-charging only for actual usage. Examples include Modal, AWS Lambda, Google Cloud
-Functions. Enables rapid deployment without traditional DevOps overhead.
+charging only for actual usage. Examples include AWS Lambda, Google Cloud
+Functions, and Modal. Enables rapid deployment without traditional DevOps
+overhead.
 
 ### Temperature
 
@@ -587,36 +605,56 @@ Working with an agent without clear specifications or plans, just having
 open-ended conversations and seeing where it goes. Often loses direction after a
 few turns and produces poor results.
 
-## Tools & Platforms
+## Open Source Tools & Platforms
 
-### Claude Code
+### A2A (Agent2Agent Protocol)
 
-Anthropic's AI coding tool, available as a CLI and integrated into editors and
-desktop interfaces. Supports agentic workflows, tool use, and computer use.
-Anthropic also provides claude.ai (web) and Claude Desktop for broader access to
-the Claude model family.
+An open protocol, introduced by Google and now hosted by the Linux Foundation,
+that lets AI agents built on different frameworks or by different vendors
+discover one another and collaborate. An agent publishes an Agent Card
+describing its capabilities and endpoints, and agents exchange tasks and
+artifacts. A2A complements MCP: MCP connects an agent to tools and data, while
+A2A connects agents to each other.
 
-### Cursor
+### KServe
 
-AI-powered code editor built on VS Code with deep AI integration for code
-completion, chat, and agent-like capabilities.
+A Kubernetes-native platform for serving machine learning and LLM models behind
+standard inference APIs, with autoscaling, canary rollouts, and multi-framework
+runtime support. A CNCF project that originated as KFServing within Kubeflow.
+
+### Kubeflow
+
+An open source toolkit for running machine learning workflows on Kubernetes,
+covering pipelines, notebooks, training jobs, and model serving. Often used as
+the orchestration layer for continuous training pipelines.
 
 ### MCP (Model Context Protocol)
 
-A protocol for connecting AI models to various data sources and tools through
-standardized servers. Enables agents to access external systems in a structured
+An open protocol for connecting AI models to various data sources and tools
+through standardized servers. Originally created by Anthropic and now hosted by
+the Linux Foundation. Enables agents to access external systems in a structured
 way.
 
-### Marimo
+### MLflow
 
-A reactive Python notebook that prevents variable redeclaration and can run
-standalone with inline dependencies. Supports deployment as web apps and
-deployment on serverless platforms.
+An open source platform for managing the machine learning lifecycle, including
+experiment tracking, a model registry, and model packaging and deployment.
+MLflow-compatible registries are a common integration point for promotion
+workflows in CI/CD pipelines.
 
-### Modal
+### OpenTelemetry (OTel)
 
-Serverless Python platform for deploying code, scheduled jobs, and web services
-without managing infrastructure. Popular for AI/ML workloads.
+A vendor-neutral, open source observability framework for generating and
+exporting traces, metrics, and logs. Its generative AI semantic conventions
+define common attributes for model calls, agent execution, and tool calls so
+that LLM traces can be collected and analyzed with standard tooling. The GenAI
+conventions are still evolving, so pin a convention version when adopting them.
+
+### Tekton
+
+A Kubernetes-native, open source framework for building CI/CD pipelines out of
+reusable tasks, and a CD Foundation project. Commonly used to run the build,
+evaluation, and promotion stages of model delivery pipelines.
 
 ---
 
