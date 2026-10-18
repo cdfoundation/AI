@@ -31,12 +31,12 @@ described in [overview.md](overview.md) — instruction fine-tuning and RLHF —
 produces the instruction-following models that most practitioners encounter as
 the starting point for their work.
 
-Important: most commercial base models (such as Claude Opus, GPT-4o, or Gemini
-Ultra) are not available for fine-tuning by external parties. When this document
-refers to fine-tuning a base model, it refers to open-weight models (such as
-Llama, Mistral, or Falcon) or models explicitly offered with fine-tuning APIs by
-their providers. Before planning a fine-tuning project, verify whether the
-specific model you intend to use supports it.
+Important: not every commercial base model is available for fine-tuning by
+external parties, and availability changes over time. When this document refers
+to fine-tuning a base model, it refers to open-weight models or models
+explicitly offered with fine-tuning APIs by their providers. Before planning a
+fine-tuning project, check whether the specific model you intend to use supports
+it.
 
 From a delivery perspective, a base model is a large binary artifact obtained
 from an external source. It must be versioned, stored, and treated as a
@@ -134,10 +134,10 @@ efficiently.
 QLoRA (Quantized LoRA) extends LoRA by first quantizing the frozen base model
 weights to 4-bit precision before adding the LoRA adapters on top. Only the LoRA
 adapter weights are trained in full precision; the quantized base weights remain
-frozen throughout. This combination reduces the GPU memory required for
-fine-tuning by roughly 75% compared to LoRA alone, making it practical to
-fine-tune models with tens of billions of parameters on a single consumer-grade
-or mid-range GPU. The quality trade-off from 4-bit quantization of the base is
+frozen throughout. This combination substantially reduces the GPU memory
+required for fine-tuning. The QLoRA authors report fine-tuning a 65B parameter
+model on a single 48GB GPU while preserving the task performance of full 16-bit
+fine-tuning. The quality trade-off from 4-bit quantization of the base is
 generally small for most downstream tasks, but should be verified through
 evaluation on the specific task before committing to a QLoRA-based pipeline.
 

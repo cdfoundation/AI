@@ -95,9 +95,12 @@ request.
 Continuous batching processes requests at the token level rather than the
 request level. As soon as a sequence in the batch produces its final token, a
 new waiting request is inserted into the batch in its place. The GPU is never
-idle waiting for a slow request to finish. This technique, pioneered by vLLM, is
-now the standard in production LLM serving and delivers significantly higher
-throughput than static batching at comparable latency.
+idle waiting for a slow request to finish. This technique, introduced as
+iteration-level scheduling in the Orca serving system (OSDI 2022), is now the
+standard in production LLM serving and delivers significantly higher throughput
+than static batching at comparable latency. Inference servers such as vLLM
+combine it with PagedAttention, which manages KV cache memory in fixed-size
+blocks to reduce waste.
 
 ## Quantization
 
@@ -127,11 +130,11 @@ queuing, batching, KV cache management, and hardware acceleration. The inference
 server is the primary deployment unit for models and the main integration point
 for CD pipelines.
 
-Common inference servers for LLMs include vLLM (optimized for continuous
-batching and high throughput), NVIDIA Triton Inference Server (multi-framework,
-enterprise-focused), ONNX Runtime (cross-framework, good for smaller models),
-and llama.cpp (CPU-friendly, useful for edge and resource-constrained
-deployments).
+Common inference servers for LLMs include vLLM (optimized for high throughput,
+with PagedAttention and continuous batching), NVIDIA Triton Inference Server
+(multi-framework, enterprise-focused), ONNX Runtime (cross-framework, good for
+smaller models), and llama.cpp (CPU-friendly, useful for edge and
+resource-constrained deployments).
 
 The choice of inference server affects performance, feature availability, and
 operational complexity, but it should not affect model quality if the same

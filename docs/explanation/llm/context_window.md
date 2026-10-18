@@ -8,10 +8,11 @@ a single interaction. It functions as the AI’s working memory. This window
 encompasses everything in the current session: the system instructions, the
 user's prompt, the conversation history, and any attached documents or data.
 
-When this limit is reached, the model must "forget" earlier parts of the
-conversation to accommodate new input, typically operating on a "first-in,
-first-out" basis. Alternatively, the interaction may simply fail if the input
-exceeds the model's absolute limit.
+If the input and the reserved output together would exceed the limit, the API
+typically rejects the request. Applications stay within the limit by choosing
+what to send on each turn, commonly by dropping the oldest messages first or by
+summarizing them (compaction). The model does not forget on its own; it only
+sees what the application sends.
 
 ## What are Tokens?
 
@@ -44,8 +45,8 @@ The context window is a shared resource consumed by several elements:
 
 The total context usage is the sum of all four components: system prompt,
 conversation history, new input, and the space reserved for the generated
-output. When any one component grows, the others must shrink or the interaction
-will be truncated or fail entirely.
+output. When any one component grows, the others must shrink or the application
+must truncate its content or the request will fail.
 
 ## The Mechanics: Why Limits Exist
 
@@ -57,25 +58,26 @@ every token and every other token in the sequence.
   required increases roughly fourfold. This makes extremely large context
   windows computationally expensive and slower (higher latency).
 - **Architecture**: The specific model architecture defines the hard limit
-  (e.g., 8,192 tokens for GPT-4 original, 128k for GPT-4o).
+  (e.g., 8,192 tokens for earlier models, 128k or more for newer ones).
 
 ## Context Window Sizes
 
-Context windows generally fall into two categories:
+Context windows are commonly grouped into the tiers below. The boundaries are
+approximate and shift as models improve.
 
-- **Standard Context (<32k tokens)**: Sufficient for chat, short summaries, and
-  coding tasks. These models are typically faster and cheaper.
-- **Long Context (128k - 2M+ tokens)**: Capable of ingesting entire books,
-  codebases, or complex legal documents.
-
-| Category         | Approximate Range | Characteristics                                                                     |
-| ---------------- | ----------------- | ----------------------------------------------------------------------------------- |
-| Standard context | Up to 32k tokens  | Fast and cost-effective; suited for chat, short documents, and focused coding tasks |
-| Long context     | 128k - 1M tokens  | Capable of ingesting entire codebases or long documents; higher latency and cost    |
-| Extended context | 1M+ tokens        | Emerging capability; suited for very large document collections and deep analysis   |
+| Category         | Approximate Range | Characteristics                                                                                                          |
+| ---------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Standard context | Up to 32k tokens  | Fast and cost-effective; suited for chat, short documents, and focused coding tasks. Still common for open-weight models |
+| Medium context   | 32k - 128k tokens | Handles long documents and multi-file coding tasks. Common for open-weight and many hosted models                        |
+| Long context     | 128k - 1M tokens  | Capable of ingesting entire codebases or long documents; higher latency and cost                                         |
+| Extended context | 1M+ tokens        | Emerging capability; suited for very large document collections and deep analysis                                        |
 
 Context window sizes vary by model and change rapidly as architectures improve.
 For current limits, consult each provider's official model documentation.
+
+A model's advertised window is also not always the usable one: self-hosted
+deployments often run models at a smaller configured context because the KV
+cache grows with context length and is limited by GPU memory.
 
 ## Challenges with Large Contexts
 
