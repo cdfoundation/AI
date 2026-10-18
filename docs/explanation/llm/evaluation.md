@@ -57,9 +57,14 @@ for edge cases that automated metrics consistently fail to catch.
 For tasks with more structured outputs, automated metrics provide scalable,
 reproducible quality signals.
 
-- **Exact match and ROUGE/BLEU**: Appropriate for tasks where the correct output
-  is well-defined — classification, extraction, structured data generation.
-  Inappropriate for open-ended generation where multiple valid outputs exist.
+- **Exact match, accuracy, and F1**: Appropriate for tasks where the correct
+  output is well-defined — classification, extraction, structured data
+  generation. Inappropriate for open-ended generation where multiple valid
+  outputs exist.
+- **ROUGE and BLEU**: Overlap metrics that score generated text by its word and
+  phrase overlap with one or more reference texts. They fit summarization and
+  translation. Because they reward overlap with a reference, they miss valid
+  paraphrases and are best paired with other signals.
 - **Code execution**: For code generation tasks, running the generated code
   against a test suite is the most reliable signal. A generated function either
   passes the tests or it does not.
