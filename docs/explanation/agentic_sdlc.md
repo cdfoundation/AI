@@ -39,6 +39,19 @@ request review operates differently from one executing a multi-day feature
 implementation. Understanding this spectrum is essential for deploying agents
 responsibly.
 
+## Agents and Pipeline Gates
+
+One position applies across the phases below:
+
+- **Deterministic checks decide pass or fail.** Tests, linters, scanners,
+  coverage thresholds, and policy checks remain the source of truth for whether
+  a change passes.
+- **The agent adds analysis and can block or escalate.** It can explain a
+  failure, flag a risk the deterministic checks miss, hold a change, or route it
+  to a human. It does not override a failing deterministic check.
+- **Production promotion keeps a human approval.** An agent can prepare and
+  recommend; a human approves.
+
 ## SDLC Phases
 
 ### Requirements and Design
@@ -115,10 +128,20 @@ Practical applications:
 - Evaluating test quality: detecting tests that assert nothing meaningful or
   that cannot fail under realistic conditions
 
-CI/CD integration: agents can operate as pipeline gates, blocking promotion of a
-change if test coverage drops below a threshold, if new code patterns match
-known vulnerability signatures, or if the agent's analysis of test failures
-indicates a regression rather than infrastructure noise.
+CI/CD integration: agents can hold a change and escalate it for human review
+when their analysis indicates a problem the deterministic checks do not catch,
+for example new code patterns that resemble known vulnerability signatures, or
+test failures that indicate a regression rather than infrastructure noise. Hard
+thresholds such as minimum test coverage are better enforced by deterministic
+checks than by the agent.
+
+Limitations:
+
+- Generated tests tend to assert current behavior, so coverage rises without
+  catching bugs; check that tests can fail, for example with mutation testing or
+  review
+- Agent triage can misclassify a genuine regression as flaky or infrastructure
+  noise, so classifications need measured accuracy before they gate anything
 
 ### CI/CD Pipeline Integration
 
@@ -130,17 +153,22 @@ Practical applications:
 - **Pipeline failure triage**: When a build or test step fails, an agent can
   inspect logs, identify the root cause, and generate a structured failure
   report, or in some cases propose and apply a fix automatically.
-- **Dynamic pipeline configuration**: Agents can adjust pipeline parameters
-  based on the scope of a change. A documentation-only commit might skip the
-  full test suite; a database migration must trigger additional validation
-  gates.
+- **Dynamic pipeline configuration**: Agents can add validation to a pipeline
+  based on the scope of a change; a database migration, for example, might
+  trigger additional validation gates. Skipping steps based on scope, such as
+  skipping the test suite for a documentation-only commit, is better done with
+  deterministic path filters, because an agent's judgment can be influenced by
+  content such as a PR description. Rule of thumb: an agent may add validation
+  gates, never remove them.
 - **Dependency and security scanning**: Agents can analyze dependency graphs,
   cross-reference vulnerability databases, and generate upgrade recommendations
   or patch pull requests.
 - **Promotion gate evaluation**: Before promoting a build from staging to
   production, an agent can evaluate metrics, test results, deployment health
   checks, and configuration drift, producing a structured recommendation for
-  human review or triggering automatic promotion if all gates pass.
+  human review. Production promotion keeps a human approval; earlier
+  environments are promoted by deterministic gates, with the agent adding
+  analysis.
 - **Release documentation**: Agents can generate changelogs, release notes, and
   migration guides from commit history, issue trackers, and pull request
   metadata.
@@ -156,6 +184,15 @@ careful harness design. The agent needs:
 
 See [Agent Harness Architecture](agents/agent_harness.md) for harness design
 details.
+
+Limitations:
+
+- Agent output is non-deterministic, so it should not be the sole pass or fail
+  gate (see Agents and Pipeline Gates)
+- Pipelines process untrusted content such as PR descriptions and issue bodies,
+  which makes the agent a prompt injection target
+- Agents add latency and token cost to each run, so they need timeouts and a
+  fallback path
 
 ### Deployment and Operations
 
@@ -195,7 +232,17 @@ Practical applications:
 - Automatic dependency upgrades with generated changelogs and test results for
   human review
 
+Limitations:
+
+- Automatic upgrades and refactors can break behavior that tests do not cover,
+  so they need passing tests and human review
+- Dead-code detection can miss reflective or dynamic usage, so findings need
+  verification
+
 ## Key Benefits
+
+These benefits are described qualitatively. Measured results vary with the team,
+tooling, and task, so validate them against your own metrics.
 
 ### Compression of Feedback Loops
 
@@ -242,8 +289,9 @@ Mitigations:
 - Where agents produce artifacts such as generated code, configuration, or
   reports, treat the artifact as the reproducible unit, not the generation
   process
-- Fix temperature parameters to reduce variance where consistency matters more
-  than creativity
+- Pin the model version, and record prompts and tool outputs, so a run can be
+  audited and its decisions reconstructed. Lowering temperature reduces variance
+  but does not give reproducibility.
 - Require human review for any agent action that is both irreversible and
   consequential
 
@@ -274,9 +322,13 @@ Key security challenges:
 
 - **Prompt injection**: Malicious content embedded in code, issue bodies, or
   external data can attempt to redirect the agent's behavior.
-- **Privilege escalation**: An agent given write access to fix test failures
-  could, if manipulated, modify test expectations rather than fixing the
-  underlying code.
+- **Privilege escalation**: An agent obtains or uses access beyond what its task
+  requires, for example by reading secrets in the environment or calling tools
+  outside its intended scope, typically after being manipulated.
+- **Goal misalignment**: An agent given write access to fix test failures could
+  modify the test expectations instead of fixing the underlying code. It acts
+  within the access it was given, so the mitigation is making test files
+  read-only for that agent and reviewing any change to test expectations.
 - **Supply chain risk**: The agent harness, the model API, and the tools the
   agent calls are all supply chain components. Each is a potential compromise
   vector.
@@ -376,8 +428,15 @@ The agent takes actions within the pipeline without step-by-step human approval.
 Constrained to specific, reversible, well-defined actions with hard limits on
 scope.
 
-Example: an agent that automatically re-runs a flaky test up to three times and
-marks the build as passed if the test succeeds on retry, logging each attempt.
+Example: an agent that classifies a failing test as flaky from its pass and fail
+history, quarantines it so it stops blocking later builds, and opens an issue
+with the evidence (failure logs, recent history, and the commits involved). It
+leaves the build status unchanged, and the quarantine is reversible and tracked
+by the issue.
+
+Re-running a flaky test until it passes is a deterministic retry that needs no
+agent, and retry-until-green can hide real intermittent failures such as race
+conditions.
 
 ### Human-in-the-Loop Gate
 
@@ -386,7 +445,7 @@ must approve before any irreversible action is taken. Essential for production
 deployments and changes to protected systems.
 
 Example: an agent that evaluates a release candidate against defined promotion
-criteria, produces a signed-off checklist, and presents it for a human approval
+criteria, produces a completed checklist, and presents it for a human approval
 gate before triggering the production deployment.
 
 ## Summary
@@ -415,4 +474,7 @@ benefits while managing the risks.
 - [CDF MLOps SIG](https://github.com/cdfoundation/sig-mlops)
 - [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+- [DORA: AI-assisted Software Development research](https://dora.dev/research/ai)
+  — annual survey research on AI adoption and delivery outcomes; check the
+  current edition
 - [Google Research: Securing the AI Software Supply Chain](https://research.google/pubs/securing-the-ai-software-supply-chain/)
