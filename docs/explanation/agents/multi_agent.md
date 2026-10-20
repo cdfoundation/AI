@@ -162,9 +162,10 @@ Two or more agents are each waiting for the other to complete before proceeding.
 This is most common in shared-context architectures where agents read state
 written by other agents.
 
-Mitigation: avoid circular dependencies between agents. If Agent A's output
-feeds Agent B, Agent B's output must not feed back into Agent A in the same
-execution.
+Mitigation: avoid unbounded cycles between agents and cap iterations. If Agent
+A's output feeds Agent B and Agent B's output feeds back into Agent A, as with
+an author and a reviewer, set a maximum number of rounds and an exit condition,
+and escalate to a human when the cap is reached.
 
 ### Conflicting Actions
 
