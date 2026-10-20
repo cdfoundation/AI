@@ -286,7 +286,7 @@ New members are advised to:
 - Join the CDF TOC mailing list.
 - Join the `#sig-ai` Slack channel in the
   [CDF Slack workspace](https://cdeliveryfdn.slack.com).
-- Review this README thoroughly.
+- Review this README and the [contributing guide](CONTRIBUTING.md) thoroughly.
 - Submit a pull request to add yourself to the Members list above.
 - Attend SIG meetings regularly.
   <!-- Update with meeting cadence and calendar link -->
