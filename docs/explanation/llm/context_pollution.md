@@ -93,25 +93,6 @@ engineering.
   the context window, use highly specific retrieval to ensure only high-signal
   information is included.
 
-## Related
-
-- [context_window.md](context_window.md) — The mechanics of the context window
-  and why size limits exist
-- [tokens.md](tokens.md) — How tokens are counted and why token waste is costly
-- [AI Glossary: Context Rot](../../reference/ai_glossary.md) — Concise
-  definition of the broader degradation phenomenon
-- [AI Glossary: Context Stuffing](../../reference/ai_glossary.md) — The
-  anti-pattern this document argues against
-- [AI Glossary: Prompt Injection](../../reference/ai_glossary.md) — The
-  deliberate form of context poisoning
-- [AI Glossary: Hallucination](../../reference/ai_glossary.md) — Root cause of
-  accidental context poisoning
-
-## Links
-
-- [OWASP GenAI Security Project: Prompt Injection](https://genai.owasp.org/)
-- [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
-
 ## Practical Example: The Grep Trap
 
 One of the most common ways developers accidentally pollute an agent's context
@@ -138,3 +119,22 @@ auto-respect ignore files (like `ripgrep`) and search interfaces that return
 structured, filtered results are preferable to raw recursive searches over the
 entire repository. The specific commands and project rules for enforcing this
 belong in a how-to guide or in the project's `AGENTS.md`.
+
+## Related
+
+- [context_window.md](context_window.md) — The mechanics of the context window
+  and why size limits exist
+- [tokens.md](tokens.md) — How tokens are counted and why token waste is costly
+- [AI Glossary: Context Rot](../../reference/ai_glossary.md#context-rot--context-window-degradation)
+  — Concise definition of the broader degradation phenomenon
+- [AI Glossary: Context Stuffing](../../reference/ai_glossary.md#context-stuffing)
+  — The anti-pattern this document argues against
+- [AI Glossary: Prompt Injection](../../reference/ai_glossary.md#prompt-injection)
+  — The deliberate form of context poisoning
+- [AI Glossary: Hallucination](../../reference/ai_glossary.md#hallucination) —
+  Root cause of accidental context poisoning
+
+## Links
+
+- [OWASP GenAI Security Project: LLM01 Prompt Injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
+- [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)

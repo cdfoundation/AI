@@ -187,11 +187,11 @@ against the base model's general capabilities.
 
 - [overview.md](overview.md)
 - [evaluation.md](evaluation.md)
-- [AI Glossary: Fine-tuning](../../reference/ai_glossary.md)
-- [AI Glossary: Foundation Model / Base Model](../../reference/ai_glossary.md)
-- [AI Glossary: LoRA / PEFT](../../reference/ai_glossary.md)
-- [AI Glossary: RAG](../../reference/ai_glossary.md)
-- [AI Glossary: Model Registry](../../reference/ai_glossary.md)
+- [AI Glossary: Fine-tuning](../../reference/ai_glossary.md#fine-tuning)
+- [AI Glossary: Foundation Model / Base Model](../../reference/ai_glossary.md#foundation-model--base-model)
+- [AI Glossary: LoRA / PEFT](../../reference/ai_glossary.md#lora--peft-low-rank-adaptation--parameter-efficient-fine-tuning)
+- [AI Glossary: RAG](../../reference/ai_glossary.md#rag-retrieval-augmented-generation)
+- [AI Glossary: Model Registry](../../reference/ai_glossary.md#model-registry)
 
 ## Links
 

@@ -183,11 +183,11 @@ is nonetheless essential for sustainable model delivery.
 - [overview.md](overview.md)
 - [fine_tuning.md](fine_tuning.md)
 - [inference.md](inference.md)
-- [AI Glossary: Evaluation Gate](../../reference/ai_glossary.md)
-- [AI Glossary: Golden Data Set](../../reference/ai_glossary.md)
-- [AI Glossary: LLM as Judge](../../reference/ai_glossary.md)
-- [AI Glossary: Evals](../../reference/ai_glossary.md)
-- [AI Glossary: Model Card](../../reference/ai_glossary.md)
+- [AI Glossary: Evaluation Gate](../../reference/ai_glossary.md#evaluation-gate)
+- [AI Glossary: Golden Data Set](../../reference/ai_glossary.md#golden-data-set--eval-set)
+- [AI Glossary: LLM as Judge](../../reference/ai_glossary.md#llm-as-judge)
+- [AI Glossary: Evals](../../reference/ai_glossary.md#evals--evaluations)
+- [AI Glossary: Model Card](../../reference/ai_glossary.md#model-card)
 
 ## Links
 

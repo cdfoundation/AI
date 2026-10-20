@@ -4,7 +4,7 @@ Large Language Models do not read text directly. They process sequences of
 integers. A token is the unit of text a model works with, and a tokenizer
 converts between text and token IDs.
 
-## The Byte Pair Encoding
+## Byte Pair Encoding
 
 Most modern models use a tokenizer based on Byte Pair Encoding (BPE). BPE starts
 from individual bytes or characters and iteratively merges the most frequently
@@ -51,7 +51,7 @@ what to send on each turn, commonly by dropping the oldest messages first or by
 summarizing them (compaction). The model does not forget on its own; it only
 sees what the application sends.
 
-## Character-Level Task
+## Character-Level Tasks
 
 Because LLMs operate on token IDs instead of individual letters, they can
 struggle with tasks that require character-level awareness.
@@ -201,10 +201,12 @@ provider updates its tokenizer.
   working memory and what happens when those limits are reached
 - [context_pollution.md](context_pollution.md) — How token waste from noise and
   redundancy degrades model reasoning
-- [AI Glossary: Tokens](../../reference/ai_glossary.md) — Concise definition
-- [AI Glossary: BPE](../../reference/ai_glossary.md) — Concise definition
-- [AI Glossary: Non-English Token Tax](../../reference/ai_glossary.md) — Related
-  concept
+- [AI Glossary: Tokens](../../reference/ai_glossary.md#tokens) — Concise
+  definition
+- [AI Glossary: BPE](../../reference/ai_glossary.md#bpe-byte-pair-encoding) —
+  Concise definition
+- [AI Glossary: Non-English Token Tax](../../reference/ai_glossary.md#non-english-token-tax)
+  — Related concept
 
 ## Links
 
