@@ -21,7 +21,7 @@ text. With a harness, an LLM can:
 ## High-Level Architecture
 
 The harness sits between the user and the raw LLM API. It manages the flow of
-information, injects system prompts, parses tool calls, and executes actions.
+information, composes system prompts, parses tool calls, and executes actions.
 
 ```text
 +----------------------------------------------------------------------+
@@ -68,7 +68,7 @@ information, injects system prompts, parses tool calls, and executes actions.
     |   Security Layer      |          |   Skills System      |
     |   - Command Validator |          |   - Discovery        |
     |   - Path Validator    |          |   - Registry         |
-    |   - Permission Mgr    |          |   - Prompt Injection |
+    |   - Permission Mgr    |          |   - Prompt Append    |
     |   - Tool Approval     |          |                      |
     +-----------------------+          +-----------------------+
 ```
@@ -86,22 +86,34 @@ implements a strict state machine:
 
 ```text
 State Flow:
-  Idle --> WaitingForUser --> Thinking --> ExecutingTool --> Completed
-                                  |                            ^
-                                  +----> Failed                |
-                                  +----------------------------+
+                                          text-only response
+  Idle --> WaitingForUser --> Thinking -----------------------> Completed
+                               |    ^
+                  tool calls   |    |   tool result appended
+                               v    |
+                            ExecutingTool
+
+  Thinking, ExecutingTool --> Failed  (error, or iteration/token limit)
 ```
 
 1. **Idle**: System is initialized.
-2. **Thinking**: The harness packages the conversation history and available
+2. **WaitingForUser**: The harness is waiting for user input, such as the
+   initial request, a clarification answer, or approval of a dangerous tool
+   call.
+3. **Thinking**: The harness packages the conversation history and available
    tools, sending them to the LLM.
-3. **ExecutingTool**: The LLM has requested an action (e.g., "read file"). The
+4. **ExecutingTool**: The LLM has requested an action (e.g., "read file"). The
    harness intercepts this request, validates security, executes the code, and
-   captures the output.
-4. **Observation**: The output (stdout/stderr) is fed back into the context
-   window as a new message.
-5. **Loop**: The cycle repeats until the LLM determines the task is complete or
-   a limit (iterations/tokens) is reached.
+   captures the output. The output (stdout/stderr) is appended to the context
+   window as a new message, the observation, and the harness returns to
+   Thinking.
+5. **Completed**: The LLM returned a text-only response with no tool calls, and
+   the result is returned to the user or caller.
+6. **Failed**: An unrecoverable error occurred or a limit (iterations or tokens)
+   was reached, and the loop stops.
+
+The Thought-Action-Observation loop is the Thinking to ExecutingTool to Thinking
+cycle. It repeats until the state is Completed or Failed.
 
 ### Workflow Diagram
 
@@ -111,7 +123,7 @@ User Input
     v
 +-------------------+     +-----------------------+
 | Mention Parser    |---->| Context Augmentation  |
-| (expand references)|    | Inject @file content  |
+| (expand references)|    | Insert @file content  |
 +-------------------+     +-----------+-----------+
                                       |
                                       v
@@ -130,22 +142,22 @@ User Input
                           | Parse LLM Response    |
                           +----+--------+---------+
                                |        |
-                  +------------+        +-------------+
+                  +------------+        +--------------+
                   | has_tool_calls?     | text only?   |
                   v                     v              |
-     +------------+-------+  +---------+---------+    |
-     | State = Executing  |  | State = Completed |    |
-     | For each ToolCall: |  | Return text to    |    |
-     |   1. Security Check|  | user / caller     |    |
-     |   2. Execute Tool  |  +-------------------+    |
-     |   3. Capture Output|                           |
-     +------------+-------+                           |
+     +------------+---------+ +---------+---------+    |
+     | State = ExecutingTool| | State = Completed |    |
+     | For each ToolCall:   | | Return text to    |    |
+     |   1. Security Check  | | user / caller     |    |
+     |   2. Execute Tool    | +-------------------+    |
+     |   3. Capture Output  |                          |
+     +------------+---------+                          |
                   |                                    |
                   v                                    |
-     +------------+-------+                           |
-     | Append Tool Result |                           |
-     | to Conversation    |                           |
-     +------------+-------+                           |
+     +------------+---------+                          |
+     | Append Tool Result   |                          |
+     | to Conversation      |                          |
+     +------------+---------+                          |
                   |                                    |
                   +---> Loop back to Thinking ->-------+
                         (Increment Iteration Count)
@@ -184,6 +196,18 @@ inspect every command before execution.
 +---------------------+
 ```
 
+Allow and deny lists on command strings are defence in depth, not a security
+boundary. String matching is easy to get around: `bash -c "..."`, shell
+expansion and substitution (`$(...)`, backticks, variables), and command
+chaining can all change what actually runs without matching a denied string. The
+actual boundary is OS-level isolation: run commands in a container or equivalent
+sandbox, as an unprivileged user, with no ambient credentials such as cloud
+tokens, SSH keys, or secrets in the environment. Treat the validator as a way to
+catch mistakes and obvious misuse, and assume an injected or determined agent
+can get around it. As with other controls, prefer a structural limit over a
+policy that can be bypassed; see
+[Structural Boundaries vs Policy](trust_and_security.md#structural-boundaries-vs-policy).
+
 ### 2. Path Validation (The Sandbox)
 
 File system access must be restricted to a specific working directory ("The
@@ -196,12 +220,17 @@ LLM tries to access `../../etc/passwd`.
 - **Symlink Protection**: Detect if a symlink inside the sandbox points to a
   target outside the sandbox.
 
+Like command validation, these checks are defence in depth; the boundary is
+OS-level isolation such as read-only mounts and a container that only sees the
+working directory.
+
 ### 3. Human-in-the-Loop (Tool Approval)
 
 For sensitive operations, the harness should pause execution and require
 explicit user approval.
 
-- **Interactive Mode**: The user is prompted [Y/n] for every tool call.
+- **Interactive Mode**: The user is prompted [y/N] for every tool call. If the
+  user just presses Enter, the call is denied.
 - **Autonomous Mode**: Safe tools (read) are auto-approved; dangerous tools
   (write/execute) require confirmation.
 - **Full Auto**: All tools are auto-approved (Use with extreme caution).
@@ -209,13 +238,14 @@ explicit user approval.
 ### 4. Network Safety (SSRF Protection)
 
 If the agent has a `fetch` tool, it must be protected against **Server-Side
-Request Forgery (SSRF)**.
-
-- **Block Localhost**: Prevent the agent from scanning internal ports
-  (`127.0.0.1`, `localhost`).
-- **Block Private Ranges**: Deny access to `192.168.x.x`, `10.x.x.x`, etc.
-- **Protocol Restriction**: Allow only `http` and `https` (no `file://` or
-  `gopher://`).
+Request Forgery (SSRF)**. The harness enforces this in its execution engine, so
+individual tools cannot skip it. Required controls include blocking loopback
+addresses (IPv4 and IPv6), private ranges, and cloud metadata endpoints;
+restricting protocols to HTTP and HTTPS; and validating the resolved IP address
+after DNS resolution on every request, including redirects. On CI runners the
+metadata endpoint is the main route to credentials. See
+[Network Safety](trust_and_security.md#network-safety) for the full list and the
+DNS rebinding rationale.
 
 ### 5. Resource Limits
 
@@ -259,9 +289,13 @@ Common Standard Library Tools:
 
 ## Summary
 
-An Agent Harness transforms a stochastic model into a deterministic application.
-It provides the **Safety**, **Memory**, and **Tools** necessary for an LLM to
-perform useful work in the real world.
+An Agent Harness makes a stochastic model bounded and auditable. The model's
+individual steps remain non-deterministic, but the harness constrains what they
+can do through validation, approval gates, and resource limits, and it is the
+point where every tool call can be logged. It provides the **Safety**,
+**Memory**, and **Tools** necessary for an LLM to perform useful work in the
+real world. See [trust_and_security.md](trust_and_security.md) for audit
+logging.
 
 The most critical component is the **Security Layer**. An agent harness without
 security is just a vulnerability waiting to be exploited. By implementing strict
