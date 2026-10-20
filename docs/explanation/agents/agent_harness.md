@@ -301,3 +301,20 @@ The most critical component is the **Security Layer**. An agent harness without
 security is just a vulnerability waiting to be exploited. By implementing strict
 path validation, command filtering, and human-in-the-loop confirmation, we can
 safely leverage the power of autonomous agents.
+
+## Related
+
+- [overview.md](overview.md)
+- [trust_and_security.md](trust_and_security.md)
+- [pipeline_patterns.md](pipeline_patterns.md)
+- [multi_agent.md](multi_agent.md)
+- [AI Glossary: Agent Harness](../../reference/ai_glossary.md)
+- [AI Glossary: Harness Engineering](../../reference/ai_glossary.md)
+- [AI Glossary: Guardrails](../../reference/ai_glossary.md)
+- [AI Glossary: Human-in-the-Loop](../../reference/ai_glossary.md)
+- [AI Glossary: Tool Use](../../reference/ai_glossary.md)
+
+## Links
+
+- [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+- [OWASP LLM06:2025 Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/)

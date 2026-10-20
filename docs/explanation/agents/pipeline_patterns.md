@@ -82,8 +82,8 @@ whether it succeeded.
 
 ## Event-Driven Triggers
 
-Agents in a CI/CD context are typically triggered by events rather than on a
-fixed schedule. Common trigger patterns:
+Agents in a CI/CD context are typically triggered by events, with scheduled runs
+for periodic maintenance tasks. Common trigger patterns:
 
 ```text
 Event Source          Trigger Condition           Agent Task
