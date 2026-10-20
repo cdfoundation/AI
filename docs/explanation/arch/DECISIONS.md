@@ -1,4 +1,4 @@
-# Next Pipeline Decision Records
+# Decision Records
 
 | ADR | Date       | Decision                                                          |
 | --- | ---------- | ----------------------------------------------------------------- |
@@ -7,3 +7,4 @@
 | 3   | 2026-10-07 | [Documentation Style](./adr-3-documentation-style.md)             |
 | 4   | 2026-10-07 | [Use GitHub Issues to Track Work](./adr-4-use-github-issues.md)   |
 | 5   | 2026-10-20 | [Require Signed Commits](./adr-5-require-signed-commits.md)       |
+

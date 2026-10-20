@@ -11,7 +11,8 @@ All content here is information-oriented. For step-by-step guidance see
 
 ## Contents
 
-| Document                                           | Description                                                     |
-| -------------------------------------------------- | --------------------------------------------------------------- |
-| [commits.md](commits.md)                           | Git commit message format, types, and semantic versioning rules |
-| [documentation_layout.md](documentation_layout.md) | Diataxis framework layout and directory structure               |
+| Document                                           | Description                                                                  |
+| -------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [ai_glossary.md](ai_glossary.md)                   | Definitions of AI, MLOps, and platform engineering terms used across the SIG |
+| [commits.md](commits.md)                           | Git commit message format, types, and semantic versioning rules              |
+| [documentation_layout.md](documentation_layout.md) | Diataxis framework layout and directory structure                            |
