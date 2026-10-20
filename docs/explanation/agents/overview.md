@@ -41,9 +41,11 @@ Simple                                                         Autonomous
 
 **Single-turn completion** is not an agent. It is a prompt and a response.
 
-**Tool-calling (single step)** is the simplest agent pattern: the model receives
-a query, decides to call a tool once, and returns the result. Most LLM APIs
-support this natively via function calling.
+**Tool-calling (single step)** sits between a plain completion and an agent: the
+model decides to call a tool once and returns the result. By the definition
+above it is not yet an agent, because there is no loop, but it is the building
+block that agent loops repeat. Most LLM APIs support this natively via function
+calling.
 
 **ReAct / Plan and Execute** is the pattern most practitioners mean when they
 say "agent." The model reasons about a goal, executes a sequence of tool calls,
