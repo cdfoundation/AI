@@ -106,11 +106,12 @@ where adversarial prompts try to override safety guardrails.
   how encoding schemes affect token counts
 - [context_pollution.md](context_pollution.md) — How a full or noisy context
   window degrades model reasoning
-- [AI Glossary: Context Window](../../reference/ai_glossary.md) — Concise
+- [AI Glossary: Context Window](../../reference/ai_glossary.md#context-window) —
+  Concise definition
+- [AI Glossary: Context Rot](../../reference/ai_glossary.md#context-rot--context-window-degradation)
+  — Related failure mode
+- [AI Glossary: Tokens](../../reference/ai_glossary.md#tokens) — Concise
   definition
-- [AI Glossary: Context Rot](../../reference/ai_glossary.md) — Related failure
-  mode
-- [AI Glossary: Tokens](../../reference/ai_glossary.md) — Concise definition
 
 ## Links
 

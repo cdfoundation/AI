@@ -190,12 +190,12 @@ the promotion pipeline.
 - [overview.md](overview.md)
 - [evaluation.md](evaluation.md)
 - [fine_tuning.md](fine_tuning.md)
-- [AI Glossary: Inference Server](../../reference/ai_glossary.md)
-- [AI Glossary: Quantization](../../reference/ai_glossary.md)
-- [AI Glossary: Latency SLO](../../reference/ai_glossary.md)
-- [AI Glossary: Canary Deployment](../../reference/ai_glossary.md)
-- [AI Glossary: Shadow Deployment](../../reference/ai_glossary.md)
-- [AI Glossary: ONNX](../../reference/ai_glossary.md)
+- [AI Glossary: Inference Server](../../reference/ai_glossary.md#inference-server)
+- [AI Glossary: Quantization](../../reference/ai_glossary.md#quantization)
+- [AI Glossary: Latency SLO](../../reference/ai_glossary.md#latency-slo-service-level-objective)
+- [AI Glossary: Canary Deployment](../../reference/ai_glossary.md#canary-deployment)
+- [AI Glossary: Shadow Deployment](../../reference/ai_glossary.md#shadow-deployment)
+- [AI Glossary: ONNX](../../reference/ai_glossary.md#onnx-open-neural-network-exchange)
 
 ## Links
 

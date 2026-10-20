@@ -145,10 +145,10 @@ Each of these steps is a CI/CD concern. Steps 1 and 2 are covered in
 - [fine_tuning.md](fine_tuning.md)
 - [inference.md](inference.md)
 - [evaluation.md](evaluation.md)
-- [AI Glossary: LLM](../../reference/ai_glossary.md)
-- [AI Glossary: Foundation Model](../../reference/ai_glossary.md)
-- [AI Glossary: Hallucination](../../reference/ai_glossary.md)
-- [AI Glossary: Model Drift](../../reference/ai_glossary.md)
+- [AI Glossary: LLM](../../reference/ai_glossary.md#llm-large-language-model)
+- [AI Glossary: Foundation Model](../../reference/ai_glossary.md#foundation-model--base-model)
+- [AI Glossary: Hallucination](../../reference/ai_glossary.md#hallucination)
+- [AI Glossary: Model Drift](../../reference/ai_glossary.md#model-drift)
 
 ## Links
 
