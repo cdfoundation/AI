@@ -113,8 +113,12 @@ To sign only the most recent commit, use `git commit --amend --no-edit -S`.
 
 ### Merging
 
-Maintainers merge using "Squash and merge" or "Create a merge commit". "Rebase
-and merge" is not used because it does not preserve contributor signatures.
+Maintainers merge using "Squash and merge". GitHub signs the squashed commit, so
+the contributor's signature is verified at merge time but is not kept on `main`.
+Maintainers with bypass permission may instead merge locally at the command line
+and push; see [ADR 5](docs/explanation/arch/adr-5-require-signed-commits.md).
+"Rebase and merge" is not used because GitHub rewrites the commits and cannot
+sign them with the contributor's key.
 
 ### Further Reading
 

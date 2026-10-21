@@ -2,7 +2,7 @@
 
 ## History
 
-- Status: proposed
+- Status: accepted
 - Deciders: Brett Smith <@xbcsmith>
 - Date: 2026-10-20
 
@@ -18,9 +18,9 @@ nothing in the repository history proves that a commit was made by the person it
 claims to be from.
 
 The project is also expected to receive contributions from AI coding agents
-operating on behalf of contributors (see `AGENTS.md`). Provenance of those
-changes matters: a reviewer needs to know which human or identity stands behind
-a commit.
+operating on behalf of contributors (see [AGENTS.md](../../../AGENTS.md)).
+Provenance of those changes matters: a reviewer needs to know which human or
+identity stands behind a commit.
 
 Should the project require that every commit merged into the repository carries
 a verified cryptographic signature, and if so, how is that enforced?
@@ -67,18 +67,38 @@ The following rules apply:
    the commit email must match a verified email on that account.
 4. Maintainers will enable the "Require signed commits" rule on the `main`
    branch protection (or an equivalent repository ruleset).
-5. Because the rule requires signatures GitHub can verify, pull requests are
-   merged with "Squash and merge" or "Create a merge commit". Commits created by
-   GitHub's web interface for the merge are signed by GitHub itself.
+5. Pull requests are merged with "Squash and merge" in the GitHub UI. The
+   squashed commit on `main` is signed by GitHub, not by the contributor. The
+   contributor's signatures are verified at merge time but are not retained on
+   the squashed commit.
+
+   A maintainer who has permission to bypass the branch protection rules may
+   instead merge locally at the command line and push to `main`. A fast-forward
+   keeps the contributor's signed commits unchanged. A merge commit created
+   locally must be signed by the maintainer before it is pushed. Because `main`
+   requires a pull request and blocks force pushes, nobody else can do this.
+
+   "Rebase and merge" is not used: GitHub always rewrites the commits, even when
+   a fast-forward is possible, and cannot sign them with the contributor's key.
+
 6. `CONTRIBUTING.md` documents the requirement and links to the setup
    instructions.
 7. Commits authored with the help of an AI agent are signed with the key of the
    human contributor who submits them. Agents must not be given access to
    signing keys, and agent-created commits must be re-signed by the contributor
-   before the pull request is opened.
+   before the pull request is opened. `AGENTS.md` instructs agents working in
+   this repository not to run git commands, so the contributor normally makes
+   and signs the commits. This rule covers the case where an agent has created
+   commits anyway, for example through tooling that does not follow `AGENTS.md`.
 
 This decision does not replace the commit message conventions in
 [ADR 2](adr-2-commit-message-style.md); both apply to every commit.
+
+This decision does not add a DCO check. DCO records a contributor's right to
+submit a change, while signing establishes who made the commit, so the two
+address different questions and can coexist. Other CDF repositories may also
+check DCO; adopting it here is out of scope for this decision and can be
+proposed in a separate ADR.
 
 ### Positive Consequences
 
@@ -95,8 +115,13 @@ This decision does not replace the commit message conventions in
   mergeable, which adds friction
 - A contributor with unsigned commits on a branch must rewrite history to sign
   them, which is awkward for those unfamiliar with `git rebase`
-- "Rebase and merge" cannot be used, because it creates new commits that do not
-  carry the contributor's signature
+- "Rebase and merge" cannot be used, because GitHub always rewrites the commits,
+  even when a fast-forward is possible, and cannot sign them with the
+  contributor's key, so they land without a verified signature
+- Squash merges put GitHub's signature on `main` in place of the contributor's
+- A local merge pushed by a maintainer with bypass permission is not checked by
+  the signed-commit rule, so signing that merge relies on the maintainer. Keep
+  the bypass list limited to maintainers.
 - A verified signature proves control of a key registered on the account, not
   the real-world identity of the person or that the change is trustworthy; code
   review remains necessary
@@ -144,4 +169,5 @@ This decision does not replace the commit message conventions in
 - [GitHub: About protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
 - [Developer Certificate of Origin](https://developercertificate.org/)
 - Related to [ADR 2 - Commit Message Style](adr-2-commit-message-style.md)
+- Related to [AGENTS.md](../../../AGENTS.md)
 - Implemented by [CONTRIBUTING.md](../../../CONTRIBUTING.md)
