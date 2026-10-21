@@ -403,10 +403,10 @@ Each layer catches what the others miss.
 - [agent_harness.md](agent_harness.md)
 - [pipeline_patterns.md](pipeline_patterns.md)
 - [multi_agent.md](multi_agent.md)
-- [AI Glossary: Prompt Injection](../../reference/ai_glossary.md)
-- [AI Glossary: Jailbreaking](../../reference/ai_glossary.md)
-- [AI Glossary: Human-in-the-Loop](../../reference/ai_glossary.md)
-- [AI Glossary: Provenance Attestation](../../reference/ai_glossary.md)
+- [AI Glossary: Prompt Injection](../../reference/ai_glossary.md#prompt-injection)
+- [AI Glossary: Jailbreaking](../../reference/ai_glossary.md#jailbreaking)
+- [AI Glossary: Human-in-the-Loop](../../reference/ai_glossary.md#human-in-the-loop-hitl)
+- [AI Glossary: Provenance Attestation](../../reference/ai_glossary.md#provenance-attestation)
 
 ## Links
 

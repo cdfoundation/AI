@@ -144,10 +144,10 @@ be.
 - [pipeline_patterns.md](pipeline_patterns.md)
 - [multi_agent.md](multi_agent.md)
 - [trust_and_security.md](trust_and_security.md)
-- [AI Glossary: Agent](../../reference/ai_glossary.md)
-- [AI Glossary: Tool Use](../../reference/ai_glossary.md)
-- [AI Glossary: Workflow vs Agent](../../reference/ai_glossary.md)
-- [AI Glossary: Human-in-the-Loop](../../reference/ai_glossary.md)
+- [AI Glossary: Agent](../../reference/ai_glossary.md#agent)
+- [AI Glossary: Tool Use](../../reference/ai_glossary.md#tool-use--tool-calling)
+- [AI Glossary: Workflow vs Agent](../../reference/ai_glossary.md#workflow-vs-agent)
+- [AI Glossary: Human-in-the-Loop](../../reference/ai_glossary.md#human-in-the-loop-hitl)
 
 ## Links
 

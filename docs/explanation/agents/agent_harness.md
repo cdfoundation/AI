@@ -308,11 +308,11 @@ safely leverage the power of autonomous agents.
 - [trust_and_security.md](trust_and_security.md)
 - [pipeline_patterns.md](pipeline_patterns.md)
 - [multi_agent.md](multi_agent.md)
-- [AI Glossary: Agent Harness](../../reference/ai_glossary.md)
-- [AI Glossary: Harness Engineering](../../reference/ai_glossary.md)
-- [AI Glossary: Guardrails](../../reference/ai_glossary.md)
-- [AI Glossary: Human-in-the-Loop](../../reference/ai_glossary.md)
-- [AI Glossary: Tool Use](../../reference/ai_glossary.md)
+- [AI Glossary: Agent Harness](../../reference/ai_glossary.md#agent-harness)
+- [AI Glossary: Harness Engineering](../../reference/ai_glossary.md#harness-engineering)
+- [AI Glossary: Guardrails](../../reference/ai_glossary.md#guardrails)
+- [AI Glossary: Human-in-the-Loop](../../reference/ai_glossary.md#human-in-the-loop-hitl)
+- [AI Glossary: Tool Use](../../reference/ai_glossary.md#tool-use--tool-calling)
 
 ## Links
 

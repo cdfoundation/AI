@@ -215,8 +215,8 @@ the complexity of orchestration.
 - [pipeline_patterns.md](pipeline_patterns.md)
 - [trust_and_security.md](trust_and_security.md)
 - [../llm/context_pollution.md](../llm/context_pollution.md)
-- [AI Glossary: Sub-agents](../../reference/ai_glossary.md)
-- [AI Glossary: Agent](../../reference/ai_glossary.md)
+- [AI Glossary: Sub-agents](../../reference/ai_glossary.md#sub-agents)
+- [AI Glossary: Agent](../../reference/ai_glossary.md#agent)
 
 ## Links
 

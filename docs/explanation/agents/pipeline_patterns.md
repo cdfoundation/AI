@@ -216,9 +216,9 @@ long as the input/output contract is preserved.
 - [overview.md](overview.md)
 - [agent_harness.md](agent_harness.md)
 - [trust_and_security.md](trust_and_security.md)
-- [AI Glossary: Async Agents](../../reference/ai_glossary.md)
-- [AI Glossary: Human-in-the-Loop](../../reference/ai_glossary.md)
-- [AI Glossary: Workflow vs Agent](../../reference/ai_glossary.md)
+- [AI Glossary: Async Agents](../../reference/ai_glossary.md#async-agents--background-agents)
+- [AI Glossary: Human-in-the-Loop](../../reference/ai_glossary.md#human-in-the-loop-hitl)
+- [AI Glossary: Workflow vs Agent](../../reference/ai_glossary.md#workflow-vs-agent)
 
 ## Links
 
