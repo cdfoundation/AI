@@ -287,24 +287,12 @@ self-declared.
 
 New members are advised to:
 
-- Join the SIG mailing list. <!-- Update with list URL when available -->
-- Join the CDF TOC mailing list.
+- Join the [CDF TOC mailing list](https://lists.cd.foundation/g/cdf-toc).
 - Join the `#sig-ai` Slack channel in the
   [CDF Slack workspace](https://cdeliveryfdn.slack.com).
 - Review this README thoroughly.
-- Submit a pull request to add yourself to the Members list above. <<<<<<<
-  Updated upstream
-- Attend SIG meetings regularly.
-  <!-- Update with meeting cadence and calendar link -->
-
-=======
-
-- Attend
-  [AI SIG meetings](https://zoom-lfx.platform.linuxfoundation.org/meeting/93837644152?password=6370aa97-576b-432f-ad7c-237f6e3366f1)
-  regularly.
-
-> > > > > > > Stashed changes
-
+- Submit a pull request to add yourself to the Members list above.
+- Attend [AI SIG meetings](https://zoom-lfx.platform.linuxfoundation.org/meeting/93837644152?password=6370aa97-576b-432f-ad7c-237f6e3366f1) regularly.
 - Contribute to the documentation and reference guide.
 
 Ways to get involved:
