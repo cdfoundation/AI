@@ -39,7 +39,9 @@ Reference the issue in your pull request.
 
 ## Contribution Workflow
 
-1. Fork the repository and create a branch from `main`.
+1. Fork the repository, add the original repository as the `upstream` remote
+   (`git remote add upstream https://github.com/cdfoundation/AI.git`), and
+   create a branch from `main`.
 2. Make your changes. Keep each pull request focused on one topic.
 3. Run the documentation quality checks (see [Documentation](#documentation)).
 4. Commit using the [commit message style](#commit-messages). All commits must
@@ -57,11 +59,14 @@ reasoning is recorded in
 [ADR 5](docs/explanation/arch/adr-5-require-signed-commits.md).
 
 GitHub accepts GPG, SSH, and S/MIME signatures. SSH signing is usually the
-simplest if you already use an SSH key with GitHub.
+simplest if you already use an SSH key with GitHub. Details on verification,
+merge methods, and repository settings are in the
+[verified commits reference](docs/reference/verified_commits.md).
 
 ### Set Up SSH Signing
 
-Run these commands once, replacing the key path with your own public key:
+SSH signing needs Git 2.34 or later. Run these commands once, replacing the key
+path with your own public key:
 
 ```bash
 git config --global gpg.format ssh
@@ -72,6 +77,14 @@ git config --global commit.gpgsign true
 Then add the same public key to your GitHub account as a **Signing Key** under
 Settings, SSH and GPG keys. A key used for authentication is not automatically
 registered for signing.
+
+To check SSH signatures locally, tell Git which keys to trust, using the same
+public key as above:
+
+```bash
+echo "$(git config user.email) namespaces=\"git\" $(cat ~/.ssh/id_ed25519.pub)" >> ~/.ssh/allowed_signers
+git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
+```
 
 ### Set Up GPG Signing
 
@@ -97,17 +110,30 @@ git commit -m "docs: fix typo in readme"
 git log --show-signature -1
 ```
 
+With SSH signing, the local check needs the allowed signers file from the SSH
+section. Without it, Git prints
+`error: gpg.ssh.allowedSignersFile needs to be configured and exist for ssh signature verification`
+followed by `No signature`, even though the commit is signed. In that case, rely
+on the badge.
+
 After you push, the commit should display a "Verified" badge on GitHub.
 
 ### Fix Unsigned Commits
 
 If a pull request contains unsigned commits, re-sign them and update your
-branch. To sign every commit since `main`:
+branch. Find the last commit that is already correct, such as the most recent
+commit that came from upstream `main`, and re-sign everything after it:
 
 ```bash
-git rebase --exec 'git commit --amend --no-edit -S' main
+git log --oneline
+git rebase --committer-date-is-author-date --exec "git commit --amend --no-edit -S" -i <last_good_commit_hash>
 git push --force-with-lease
 ```
+
+Git opens an editor with the list of commits to replay. Save and close it to
+continue. Do not rebase onto your local `main` in a fork: it is usually behind
+upstream, so the rebase can replay upstream commits and re-sign them with your
+key. See the [verified commits reference](docs/reference/verified_commits.md).
 
 To sign only the most recent commit, use `git commit --amend --no-edit -S`.
 
@@ -118,7 +144,9 @@ the contributor's signature is verified at merge time but is not kept on `main`.
 Maintainers with bypass permission may instead merge locally at the command line
 and push; see [ADR 5](docs/explanation/arch/adr-5-require-signed-commits.md).
 "Rebase and merge" is not used because GitHub rewrites the commits and cannot
-sign them with the contributor's key.
+sign them with the contributor's key. The squash commit message is the pull
+request title and description, so write the description as the final commit
+body.
 
 ### Further Reading
 

@@ -81,6 +81,13 @@ The following rules apply:
    "Rebase and merge" is not used: GitHub always rewrites the commits, even when
    a fast-forward is possible, and cannot sign them with the contributor's key.
 
+   "Allow merge commits" is turned off in this repository. Squash stays enabled:
+   without it, rebase would be the only method left, and this rule rules rebase
+   out. The squash default message is set to "Pull request title and
+   description" so that the commit on `main` is the conventional pull request
+   title plus its description. See the
+   [verified commits reference](../../reference/verified_commits.md).
+
 6. `CONTRIBUTING.md` documents the requirement and links to the setup
    instructions.
 7. Commits authored with the help of an AI agent are signed with the key of the
@@ -170,4 +177,6 @@ proposed in a separate ADR.
 - [Developer Certificate of Origin](https://developercertificate.org/)
 - Related to [ADR 2 - Commit Message Style](adr-2-commit-message-style.md)
 - Related to [AGENTS.md](../../../AGENTS.md)
+- Details in the
+  [verified commits reference](../../reference/verified_commits.md)
 - Implemented by [CONTRIBUTING.md](../../../CONTRIBUTING.md)
