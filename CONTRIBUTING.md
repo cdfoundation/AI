@@ -121,19 +121,40 @@ After you push, the commit should display a "Verified" badge on GitHub.
 ### Fix Unsigned Commits
 
 If a pull request contains unsigned commits, re-sign them and update your
-branch. Find the last commit that is already correct, such as the most recent
-commit that came from upstream `main`, and re-sign everything after it:
+branch. In a fork, re-sign only your own commits. Your local `main` is usually
+behind `upstream`, so a rebase that replays upstream commits re-signs them with
+your key and adds them to your pull request.
+
+First, list the commits that exist only on your branch:
 
 ```bash
-git log --oneline
+git fetch upstream
+git log --oneline upstream/main..HEAD
+```
+
+The list should show only your own commits, plus any merge of `upstream/main`
+made by the Update branch button. If it shows commits you did not write, stop
+and ask in the pull request.
+
+Then re-sign them by rebasing onto `upstream/main`:
+
+```bash
+git rebase --committer-date-is-author-date --exec "git commit --amend --no-edit -S" upstream/main
+git push --force-with-lease
+```
+
+Alternatively, keep your branch's base and re-sign everything after the last
+commit that is already correct:
+
+```bash
 git rebase --committer-date-is-author-date --exec "git commit --amend --no-edit -S" -i <last_good_commit_hash>
 git push --force-with-lease
 ```
 
-Git opens an editor with the list of commits to replay. Save and close it to
-continue. Do not rebase onto your local `main` in a fork: it is usually behind
-upstream, so the rebase can replay upstream commits and re-sign them with your
-key. See the [verified commits reference](docs/reference/verified_commits.md).
+With `-i`, Git opens an editor with the list of commits to replay. Save and
+close it to continue. Use the hash of the commit just before the first commit in
+the `git log` output above. See the
+[verified commits reference](docs/reference/verified_commits.md).
 
 To sign only the most recent commit, use `git commit --amend --no-edit -S`.
 

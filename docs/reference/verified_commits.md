@@ -90,10 +90,15 @@ Update branch button, rebasing onto local `main` drops those merge commits and
 replays the upstream commits that local `main` lacks. Those commits are then
 re-signed with the contributor's key and end up in the pull request.
 
-Re-sign only the commits on the pull request branch, starting after the last
-commit that is already correct. The command is in
-[CONTRIBUTING.md](../../CONTRIBUTING.md). Rebasing onto `upstream/main` after
-`git fetch upstream` also works.
+Re-sign only the commits on the pull request branch. Before rebasing, run
+`git fetch upstream` and `git log --oneline upstream/main..HEAD`. The output
+lists the commits reachable from the branch but not from `upstream/main`, which
+is exactly what a rebase would re-sign. It should show only the contributor's
+own commits, plus any merge of `upstream/main` made by the Update branch button.
+Commits the contributor did not write mean the rebase base is wrong.
+
+The commands, rebasing onto `upstream/main` or from the last good commit, are in
+[CONTRIBUTING.md](../../CONTRIBUTING.md).
 
 ## Related
 
