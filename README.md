@@ -292,7 +292,9 @@ New members are advised to:
   [CDF Slack workspace](https://cdeliveryfdn.slack.com).
 - Review this README and the [contributing guide](CONTRIBUTING.md) thoroughly.
 - Submit a pull request to add yourself to the Members list above.
-- Attend [AI SIG meetings](https://zoom-lfx.platform.linuxfoundation.org/meeting/93837644152?password=6370aa97-576b-432f-ad7c-237f6e3366f1) regularly.
+- Attend
+  [AI SIG meetings](https://zoom-lfx.platform.linuxfoundation.org/meeting/93837644152?password=6370aa97-576b-432f-ad7c-237f6e3366f1)
+  regularly.
 - Contribute to the documentation and reference guide.
 
 Ways to get involved:
