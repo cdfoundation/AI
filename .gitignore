@@ -5,7 +5,7 @@ target
 /*.sh
 *.log
 .claude
-*.txt
+/*.txt
 
 temp/
 *.DS_Store
