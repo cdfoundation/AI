@@ -22,7 +22,8 @@ CI/CD pipelines expect `.yaml`. Using `.yml` causes build failures.
 ### Rule 2: Markdown File Naming
 
 - Use `lowercase_with_underscores.md` for all documentation files
-- `README.md`, `LICENSE.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `AGENTS.md`, and `CHANGELOG.md` are the ONLY exception to the lowercase rule
+- `README.md`, `LICENSE.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`,
+  `AGENTS.md`, and `CHANGELOG.md` are the ONLY exception to the lowercase rule
 - Never use CamelCase, kebab-case, spaces, or uppercase
 
 Inconsistent naming breaks documentation links.
