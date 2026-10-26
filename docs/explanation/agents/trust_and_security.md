@@ -159,8 +159,11 @@ mitigations simultaneously — is the appropriate strategy.
 
 ## The Lethal Trifecta
 
-The Lethal Trifecta is a term coined by Simon Willison in June 2025:
-[The lethal trifecta for AI agents: private data, untrusted content, and external communication](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/).
+The Lethal Trifecta is a term coined by Simon Willison in June 2025: [The lethal
+trifecta for AI agents: private data, untrusted content, and external
+communication][lethal-trifecta].
+
+[lethal-trifecta]: https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
 
 Individual agent capabilities are manageable in isolation. Their combination is
 not. When all three of the following are present in a single agent, the
