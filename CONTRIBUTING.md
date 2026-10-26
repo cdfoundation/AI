@@ -12,7 +12,9 @@ SIG.
 
 1. Join the `#sig-ai` Slack channel in the
    [CDF Slack workspace](https://cdeliveryfdn.slack.com).
-2. Join the CDF TOC mailing list and the SIG mailing list.
+2. Join the [CDF TOC mailing list](https://lists.cd.foundation/g/cdf-toc)
+   mailing list and the
+   [SIG mailing list](https://lists.cd.foundation/g/sig-ai).
 3. Attend SIG meetings when you can.
 4. Add yourself to the Members list in the [README](README.md) with a pull
    request. Membership is self-declared.
@@ -211,8 +213,9 @@ documents in the directory that matches the reader's need:
 Conventions:
 
 - Use `.md` for Markdown and `.yaml` for YAML files.
-- Name documentation files `lowercase_with_underscores.md`. `README.md` and
-  `CONTRIBUTING.md` are the only exceptions.
+- Name documentation files `lowercase_with_underscores.md`.
+  `README.md`,`LICENSE.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`,
+  `AGENTS.md`, and `CHANGELOG.md` are the only exceptions.
 - Do not use emojis in code, comments, documentation, or commit messages.
 
 Before opening a pull request, run both checks on every Markdown file you

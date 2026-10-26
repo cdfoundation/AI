@@ -82,8 +82,8 @@ The following rules apply:
    a fast-forward is possible, and cannot sign them with the contributor's key.
 
    "Allow merge commits" is turned off in this repository. Squash stays enabled:
-   without it, rebase would be the only method left, and this rule rules rebase
-   out. The squash default message is set to "Pull request title and
+   without it, rebase would be the only method left, and this decision rules
+   rebase out. The squash default message is set to "Pull request title and
    description" so that the commit on `main` is the conventional pull request
    title plus its description. See the
    [verified commits reference](../../reference/verified_commits.md).
