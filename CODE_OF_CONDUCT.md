@@ -75,6 +75,12 @@ When an incident does occur, it is important to report it promptly. To report a
 possible violation, email details to
 [support@cd.foundation](mailto:support@cd.foundation).
 
+In this Code of Conduct, "Community Moderators" and "Community Managers" are CDF
+staff who handle reports sent to
+[support@cd.foundation](mailto:support@cd.foundation). This SIG has no separately
+named moderators; CDF SIG governance is described in the
+[CDF Working Groups and SIGs process](https://github.com/cdfoundation/toc/blob/main/GROUPS.md#sigs).
+
 Community Moderators take reports of violations seriously and will make every
 effort to respond in a timely manner. They will investigate all reports of code
 of conduct violations, reviewing messages, logs, and recordings, or interviewing
