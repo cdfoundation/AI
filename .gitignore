@@ -6,6 +6,7 @@ target
 *.log
 .claude
 /*.txt
+!/project-words.txt
 
 temp/
 *.DS_Store
