@@ -277,6 +277,7 @@ beyond, we aim to engage:
 - Dadisi Sanyika <@dsanyika>
 - Srishti Sehgal <@SrishtiSehgal>
 - Pradumn Kumar Tiwari <@pradumn7>
+- Brandon Apol <@brandonapol>
 
 ---
 
