@@ -47,8 +47,6 @@ Stop immediately and fix if any command fails.
 
 ### Rule 5: Documentation is Mandatory
 
-- Create `docs/explanation/<feature_name>_implementation.md` for every feature
-  or task
 - Never skip documentation because "code is self-documenting"
 
 ### Rule 6: Use the Agent Harness Tools
