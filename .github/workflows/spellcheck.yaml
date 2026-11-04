@@ -1,0 +1,28 @@
+name: Spellcheck
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  cspell:
+    name: cspell
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Run cspell on Markdown files
+        uses: streetsidesoftware/cspell-action@ce1816e4ce36532956ac6e983737392774b6e169 # v9.2.0
+        with:
+          config: cspell.json
+          files: "**/*.md"
+          incremental_files_only: false
+          strict: true
+          inline: error
+          summary: true

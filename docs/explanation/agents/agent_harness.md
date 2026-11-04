@@ -196,7 +196,7 @@ inspect every command before execution.
 +---------------------+
 ```
 
-Allow and deny lists on command strings are defence in depth, not a security
+Allow and deny lists on command strings are defense in depth, not a security
 boundary. String matching is easy to get around: `bash -c "..."`, shell
 expansion and substitution (`$(...)`, backticks, variables), and command
 chaining can all change what actually runs without matching a denied string. The
@@ -220,7 +220,7 @@ LLM tries to access `../../etc/passwd`.
 - **Symlink Protection**: Detect if a symlink inside the sandbox points to a
   target outside the sandbox.
 
-Like command validation, these checks are defence in depth; the boundary is
+Like command validation, these checks are defense in depth; the boundary is
 OS-level isolation such as read-only mounts and a container that only sees the
 working directory.
 
