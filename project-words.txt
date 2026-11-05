@@ -3,7 +3,7 @@
 Animesh
 Apol
 automatable
-behaviour
+behavior
 BLEU
 brandonapol
 Dadisi
