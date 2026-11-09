@@ -114,7 +114,8 @@ git log --show-signature -1
 
 With SSH signing, the local check needs the allowed signers file from the SSH
 section. Without it, Git prints
-`error: gpg.ssh.allowedSignersFile needs to be configured and exist for ssh signature verification`
+`error: gpg.ssh.allowedSignersFile needs to be configured and exist for`
+`ssh signature verification`
 followed by `No signature`, even though the commit is signed. In that case, rely
 on the badge.
 
