@@ -1,4 +1,4 @@
-# Contributor Covenant 3.0 Code of Conduct
+# CDF AI-SIG Contributor Covenant 3.0 Code of Conduct
 
 ## Our Pledge
 
@@ -77,8 +77,8 @@ possible violation, email details to
 
 In this Code of Conduct, "Community Moderators" and "Community Managers" are CDF
 staff who handle reports sent to
-[support@cd.foundation](mailto:support@cd.foundation). This SIG has no separately
-named moderators; CDF SIG governance is described in the
+[support@cd.foundation](mailto:support@cd.foundation). This SIG has no
+separately named moderators; CDF SIG governance is described in the
 [CDF Working Groups and SIGs process](https://github.com/cdfoundation/toc/blob/main/GROUPS.md#sigs).
 
 Community Moderators take reports of violations seriously and will make every
