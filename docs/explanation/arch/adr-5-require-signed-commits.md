@@ -66,7 +66,8 @@ The following rules apply:
 3. The signing key must be registered on the contributor's GitHub account, and
    the commit email must match a verified email on that account.
 4. Maintainers will enable the "Require signed commits" rule on the `main`
-   branch protection (or an equivalent repository ruleset).
+   branch protection (or an equivalent repository ruleset). Link to
+   [ruleset](https://github.com/cdfoundation/AI/rules/25012670)
 5. Pull requests are merged with "Squash and merge" in the GitHub UI. The
    squashed commit on `main` is signed by GitHub, not by the contributor. The
    contributor's signatures are verified at merge time but are not retained on

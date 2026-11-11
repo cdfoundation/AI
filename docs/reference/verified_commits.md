@@ -30,9 +30,8 @@ useful for catching problems before pushing.
   pointing to an existing file that lists the trusted public keys. Without it,
   `git log --show-signature -1` prints
   `error: gpg.ssh.allowedSignersFile needs to be configured and exist for`
-  `ssh signature verification`
-  followed by `No signature`, even when the commit is signed. This was
-  reproduced locally during review.
+  `ssh signature verification` followed by `No signature`, even when the commit
+  is signed. This was reproduced locally during review.
 
 An SSH user who does not want to maintain an allowed signers file can rely on
 the Verified badge after pushing. The setup commands are in
