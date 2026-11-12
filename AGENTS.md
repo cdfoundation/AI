@@ -41,7 +41,11 @@ Run in this order before claiming any task complete:
 ```bash
 markdownlint --fix --config .markdownlint.json "${FILE}"
 prettier --write --parser markdown --prose-wrap always "${FILE}"
+npx cspell@10.4.0 lint --no-progress "${FILE}"
 ```
+
+If cspell flags a correctly spelled word, add it to `project-words.txt`. See
+`docs/how-to/run_spellcheck.md`.
 
 Stop immediately and fix if any command fails.
 

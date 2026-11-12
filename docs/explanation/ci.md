@@ -47,7 +47,7 @@ The current configuration is:
 
 - `default: true`: all rules are enabled by default.
 - `line-length`: relaxed for code blocks, tables, and headings. Elsewhere lines
-  are limited to 80 columns. markdownlint's default (non-strict) behaviour does
+  are limited to 80 columns. markdownlint's default (non-strict) behavior does
   not flag a line when its excess length has no whitespace, for example a long
   URL at the end of a line, so a link reference definition whose URL extends
   past column 80 is also not flagged.

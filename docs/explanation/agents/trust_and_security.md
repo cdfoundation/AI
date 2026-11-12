@@ -171,8 +171,8 @@ conditions for straightforward data exfiltration exist:
 
 ```text
 +------------------+   +--------------------+   +----------------------+
-|   Private Data   |   | Untrusted Content  |   | External Communi-    |
-|                  |   |                    |   | cation               |
+|   Private Data   |   | Untrusted Content  |   | External             |
+|                  |   |                    |   | Communication        |
 | Secrets, repos,  |   | Attacker-controlled|   | Any channel that can |
 | files, API keys, |   | input: issues, PRs,|   | carry data out:      |
 | internal APIs    |   | web pages, emails  |   | PRs, webhooks, HTTP  |
