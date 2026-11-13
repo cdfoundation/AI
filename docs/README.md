@@ -47,3 +47,8 @@ create a model".
 Explanations are understanding oriented. They discuss the background and context
 of the architecture, decisions made, research that was done, and the pros and
 cons of things. Discussions explain why things are the way they are.
+
+Short security posts live in
+[`explanation/blogs/`](./explanation/blogs/README.md). They cover practical
+security concerns for AI systems in delivery pipelines, including prompt
+injection, supply chain integrity, and agent permissions.
