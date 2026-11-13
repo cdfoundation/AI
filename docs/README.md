@@ -11,7 +11,7 @@ AI Documentation will follow the [Diataxis](https://diataxis.fr/start-here)
 document layout format. Diátaxis identifies four distinct needs, and four
 corresponding forms of documentation - tutorials, how-to guides, technical
 reference and explanation. It places them in a systematic relationship, and
-proposes that documentation should itself be organised around the structures of
+proposes that documentation should itself be organized around the structures of
 those needs.
 
 ## Table of Contents
