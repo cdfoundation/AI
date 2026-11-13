@@ -16,3 +16,4 @@ All content here is information-oriented. For step-by-step guidance see
 | [ai_glossary.md](ai_glossary.md)                   | Definitions of AI, MLOps, and platform engineering terms used across the SIG |
 | [commits.md](commits.md)                           | Git commit message format, types, and semantic versioning rules              |
 | [documentation_layout.md](documentation_layout.md) | Diataxis framework layout and directory structure                            |
+| [verified_commits.md](verified_commits.md)         | Signing methods, merge methods, and repository settings for verified commits |
