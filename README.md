@@ -292,6 +292,9 @@ New members are advised to:
   [SIG mailing list](https://lists.cd.foundation/g/sig-ai).
 - Join the `#sig-ai` Slack channel in the
   [CDF Slack workspace](https://cdeliveryfdn.slack.com).
+- Review this README thoroughly.
+- Read the [Code of Conduct](CODE_OF_CONDUCT.md), which applies in all SIG
+  community spaces.
 - Review this README and the [contributing guide](CONTRIBUTING.md) thoroughly.
 - Submit a pull request to add yourself to the Members list above.
 - Attend
