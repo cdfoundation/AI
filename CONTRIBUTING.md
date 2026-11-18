@@ -53,6 +53,34 @@ Reference the issue in your pull request.
 6. Respond to review feedback. Maintainers merge the pull request once it is
    approved and all commits are verified.
 
+## One Commit Per Pull Request
+
+Each pull request should contain exactly one commit. The repository only allows
+"Squash and merge", and GitHub builds the squash commit message from the
+messages of every commit on the branch. With a single commit, the message that
+reviewers read is the message that lands on `main`, and follow-up messages such
+as "address review comments" stay out of the history.
+
+If you add commits to an open pull request, for example to address review
+feedback, squash them into one commit before asking for another review:
+
+```bash
+git fetch upstream
+git reset --soft "$(git merge-base upstream/main HEAD)"
+git commit
+git push --force-with-lease
+```
+
+`git reset --soft` keeps all of your changes staged, so `git commit` records
+them as a single new commit. Write its message in the style described in the
+[commit guidelines](docs/reference/commits.md), and keep any trailers, such as
+`Co-Authored-By:`, that the original commits carried. Use `--force-with-lease`
+rather than `--force` so the push fails instead of overwriting commits you have
+not seen.
+
+The contributor who submits the pull request is responsible for the squash. AI
+agents do not run git commands in this repository; see [AGENTS.md](AGENTS.md).
+
 ## Signed Commits
 
 All commits must carry a verified signature. GitHub must show each commit in
